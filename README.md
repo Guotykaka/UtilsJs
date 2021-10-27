@@ -80,3 +80,30 @@ const quickSort = arr => {
 
 *quickSort([1, 6, 1, 5, 3, 2, 1, 4]); // [1, 1, 1, 2, 3, 4, 5, 6]*
 ***
+#### 5.partition
+   将元素分组为两个数组，具体取决于为每个元素提供的函数的真实性。
+   使用Array.prototype.reduce()以创建两个数组的数组。
+   使用Array.prototype.push()针对其元素添加fn返回true到所述第一阵列和用于该元件fn返回false到第二个。ay.prototype.push()将数组拆分为两个子数组。第一个包含小于或等于的pivot元素，第二个包含大于它的元素。将结果解构为两个数组。
+   递归调用quickSort()创建的子数组。
+```
+const partition = (arr, fn) =>
+  arr.reduce(
+    (acc, val, i, arr) => {
+      acc[fn(val, i, arr) ? 0 : 1].push(val);
+      return acc;
+    },
+    [[], []]
+  );
+```
+*Examples*
+
+*const users = [
+  { user: 'barney', age: 36, active: false },
+  { user: 'fred', age: 40, active: true },
+];
+partition(users, o => o.active);
+// [
+//   [{ user: 'fred', age: 40, active: true }],
+//   [{ user: 'barney', age: 36, active: false }]
+// ]*
+***
